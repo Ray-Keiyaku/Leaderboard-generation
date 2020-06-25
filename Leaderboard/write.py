@@ -1,4 +1,5 @@
 import sqlite3
+
 from globalData import data
 
 
@@ -11,7 +12,7 @@ def init_database():
     for tab in Tables:
         if tab not in data.INIT_LIST:
             conn.execute('''DROP TABLE \"{}\"'''.format(tab))
-        
+
     if not set(data.INIT_LIST) > set(Tables):
         for tab in data.INIT_LIST:
             if tab not in Tables:
@@ -19,7 +20,7 @@ def init_database():
                                 (ID         INT     PRIMARY KEY     NOT NULL,
                                 NAME        TEXT    NOT NULL    UNIQUE,
                                 PicStyle    INT     NOT NULL,
-                                PicQuailty  INT     NOT NULL,
+                                PicQuality  INT     NOT NULL,
                                 Music       INT     NOT NULL,
                                 Voice       INT     NOT NULL,
                                 Setting     INT     NOT NULL,
@@ -29,5 +30,5 @@ def init_database():
                                 Recommend   REAL     NOT NULL);'''.format(tab))
 
 
-# def insert_row(table_name):
-#     
+def insert_to_table(table_now, v_NAME, v_PicStyle, v_PicQuality, v_Music, v_Voice, v_Setting, v_Plot, v_Character):
+    pass

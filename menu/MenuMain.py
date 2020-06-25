@@ -1,16 +1,18 @@
 import tkinter as tk
 from tkinter import END, DISABLED
 from Leaderboard.read import get_table_content
+from menu.MenuInsert import MenuInsert
 
 
 class MenuMain(tk.Toplevel):
-    def __init__(self, Tablename):
+    def __init__(self, table_now):
         super().__init__()
         self.title('排行榜控制中心')
         self.geometry('1000x600')
 
         # 数据
-        self.data = get_table_content(Tablename)
+        self.data = get_table_content(table_now)
+        self.table_now = table_now
 
         # 弹窗界面
         self.setup_UI()
@@ -105,7 +107,7 @@ class MenuMain(tk.Toplevel):
         content.config(state=DISABLED)
         content.grid(row=0, column=10, sticky=tk.W)
 
-        #button
+        # button
         frame_button = tk.Frame(self)
 
         button_print = tk.Button(frame_button, text='打印排行', font=('Arial', 15), width=12, height=1, command=self.print)
@@ -125,7 +127,8 @@ class MenuMain(tk.Toplevel):
         self.destroy()
 
     def insert(self):
-        self.destroy()
+        MenuInsert(self.table_now)
+        # self.destroy()
 
     def change(self):
         self.destroy()
