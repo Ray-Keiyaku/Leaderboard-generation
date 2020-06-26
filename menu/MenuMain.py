@@ -19,18 +19,20 @@ class MenuMain(tk.Toplevel):
         self.grab_set()
 
     def setup_UI(self):
-        # ID
-        content = tk.Text(self, font=('Arial', 12), height=20, width=4)
-        for item in self.data:
-            content.insert(END, item[0])
-            content.insert(tk.INSERT, '\n')
+        # RANK
+        content = tk.Text(self, font=('Arial', 12), height=20, width=5)
+        content.insert(END, 'RANK')
+        if len(self.data) > 0:
+            for i in range(1, len(self.data)):
+                content.insert(END, i)
+                content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=0, sticky=tk.W)
 
         # NAME
         content = tk.Text(self, font=('Arial', 12), height=20, width=25)
         for item in self.data:
-            content.insert(END, item[1])
+            content.insert(END, item[0])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=1, sticky=tk.W)
@@ -38,7 +40,7 @@ class MenuMain(tk.Toplevel):
         # PicStyle
         content = tk.Text(self, font=('Arial', 12), height=20, width=8)
         for item in self.data:
-            content.insert(END, item[2])
+            content.insert(END, item[1])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=2, sticky=tk.W)
@@ -46,7 +48,7 @@ class MenuMain(tk.Toplevel):
         # PicQuality
         content = tk.Text(self, font=('Arial', 12), height=20, width=8)
         for item in self.data:
-            content.insert(END, item[3])
+            content.insert(END, item[2])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=3, sticky=tk.W)
@@ -54,7 +56,7 @@ class MenuMain(tk.Toplevel):
         # Music
         content = tk.Text(self, font=('Arial', 12), height=20, width=8)
         for item in self.data:
-            content.insert(END, item[4])
+            content.insert(END, item[3])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=4, sticky=tk.W)
@@ -62,7 +64,7 @@ class MenuMain(tk.Toplevel):
         # Voice
         content = tk.Text(self, font=('Arial', 12), height=20, width=8)
         for item in self.data:
-            content.insert(END, item[5])
+            content.insert(END, item[4])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=5, sticky=tk.W)
@@ -70,7 +72,7 @@ class MenuMain(tk.Toplevel):
         # Setting
         content = tk.Text(self, font=('Arial', 12), height=20, width=8)
         for item in self.data:
-            content.insert(END, item[6])
+            content.insert(END, item[5])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=6, sticky=tk.W)
@@ -78,7 +80,7 @@ class MenuMain(tk.Toplevel):
         # Plot
         content = tk.Text(self, font=('Arial', 12), height=20, width=8)
         for item in self.data:
-            content.insert(END, item[7])
+            content.insert(END, item[6])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=7, sticky=tk.W)
@@ -86,7 +88,7 @@ class MenuMain(tk.Toplevel):
         # Character
         content = tk.Text(self, font=('Arial', 12), height=20, width=8)
         for item in self.data:
-            content.insert(END, item[8])
+            content.insert(END, item[7])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=8, sticky=tk.W)
@@ -94,7 +96,7 @@ class MenuMain(tk.Toplevel):
         # TotalPoint
         content = tk.Text(self, font=('Arial', 12), height=20, width=8)
         for item in self.data:
-            content.insert(END, item[9])
+            content.insert(END, item[8])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=9, sticky=tk.W)
@@ -102,7 +104,7 @@ class MenuMain(tk.Toplevel):
         # Recommend
         content = tk.Text(self, font=('Arial', 12), height=20, width=10)
         for item in self.data:
-            content.insert(END, item[10])
+            content.insert(END, item[9])
             content.insert(tk.INSERT, '\n')
         content.config(state=DISABLED)
         content.grid(row=0, column=10, sticky=tk.W)
@@ -127,8 +129,9 @@ class MenuMain(tk.Toplevel):
         self.destroy()
 
     def insert(self):
-        MenuInsert(self.table_now)
-        # self.destroy()
+        insertDialog = MenuInsert(self.table_now)
+        self.wait_window(insertDialog)
+        self.update_data()
 
     def change(self):
         self.destroy()
@@ -138,3 +141,8 @@ class MenuMain(tk.Toplevel):
 
     def back(self):
         self.destroy()  # 销毁窗口
+
+    def update_data(self):
+        self.data = get_table_content(self.table_now)
+        self.setup_UI()
+        self.grab_set()

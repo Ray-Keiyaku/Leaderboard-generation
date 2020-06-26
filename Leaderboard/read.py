@@ -20,9 +20,9 @@ def get_table_content(table_name):
     cur = conn.cursor()  # 创建游标cur来执行SQL语句
     cur.execute("SELECT * FROM {}".format(table_name))
     content_list.append([item[0] for item in cur.description])
-    cur.execute("SELECT NAME, TOTALPOINT from {} ORDER BY TOTALPOINT DESC".format(table_name))
+    cur.execute("SELECT * from {} ORDER BY TotalPoint DESC".format(table_name))
     for row in cur:
-        content_list.append([row[0], row[1]])
+        content_list.append(list(row))
     # print(content_list)
     return content_list
 

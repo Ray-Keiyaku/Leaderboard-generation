@@ -32,7 +32,8 @@ class MenuRoot(tk.Tk):
         if res is None:
             return
         # print(res)
-        MenuMain(res)
+        mainDialog = MenuMain(res)
+        self.wait_window(mainDialog)
 
     def ask_table_name(self):
         inputDialog = MenuAskTable()

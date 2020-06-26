@@ -2,6 +2,7 @@ import tkinter as tk
 
 from Leaderboard.read import get_table_content
 from Leaderboard.write import insert_to_table
+from globalData import data
 
 
 class MenuInsert(tk.Toplevel):
@@ -79,14 +80,16 @@ class MenuInsert(tk.Toplevel):
         frame_button.grid(row=2, column=0, columnspan=2, sticky=tk.E)
 
     def confirm(self):
+        print(self.data)
         for item in self.data:
-            if self.v_NAME.get() in item[1]:
+            if self.v_NAME.get() == item[0]:
                 tk.messagebox.showwarning(message='该名称已存在')
                 return
         if not_number(self.v_PicStyle.get()) or int(self.v_PicStyle.get()) > 100 or int(self.v_PicStyle.get()) < 0:
             tk.messagebox.showwarning(message='画风数值非法！(范围：0-100)')
             return
-        if not_number(self.v_PicQuality.get()) or int(self.v_PicQuality.get()) > 100 or int(self.v_PicQuality.get()) < 0:
+        if not_number(self.v_PicQuality.get()) or int(self.v_PicQuality.get()) > 100 or int(
+                self.v_PicQuality.get()) < 0:
             tk.messagebox.showwarning(message='画质数值非法！(范围：0-100)')
             return
         if not_number(self.v_Music.get()) or int(self.v_Music.get()) > 100 or int(self.v_Music.get()) < 0:
@@ -104,14 +107,39 @@ class MenuInsert(tk.Toplevel):
         if not_number(self.v_Character.get()) or int(self.v_Character.get()) > 100 or int(self.v_Character.get()) < 0:
             tk.messagebox.showwarning(message='角色数值非法！(范围：0-100)')
             return
+        total_point, recommend_point = self.cal_point()
+        a = tk.messagebox.askokcancel('提示:', '总分为：{}\n推荐分为：{}\n'.format(total_point, recommend_point))
+        if not a:
+            return
         insert_to_table(self.table_now, self.v_NAME.get(), int(self.v_PicStyle.get()), int(self.v_PicQuality.get()),
                         int(self.v_Music.get()), int(self.v_Voice.get()), int(self.v_Setting.get()),
-                        int(self.v_Plot.get()), int(self.v_Character.get()))
+                        int(self.v_Plot.get()), int(self.v_Character.get()), total_point, recommend_point)
 
         self.destroy()  # 销毁窗口
 
     def cancel(self):
         self.destroy()
+
+    def cal_point(self):
+        weight_total = [data.WEIGHT_TOTAL['画风'], data.WEIGHT_TOTAL['画质'], data.WEIGHT_TOTAL['音乐'],
+                        data.WEIGHT_TOTAL['语音'], data.WEIGHT_TOTAL['设定'], data.WEIGHT_TOTAL['剧情'],
+                        data.WEIGHT_TOTAL['角色']]
+        weight_recommend = [data.WEIGHT_RECOMMEND['画风'], data.WEIGHT_RECOMMEND['画质'],
+                            data.WEIGHT_RECOMMEND['音乐'], data.WEIGHT_RECOMMEND['语音'],
+                            data.WEIGHT_RECOMMEND['设定'], data.WEIGHT_RECOMMEND['剧情'],
+                            data.WEIGHT_RECOMMEND['角色']]
+        point_list = [int(self.v_PicStyle.get()), int(self.v_PicQuality.get()),
+                      int(self.v_Music.get()), int(self.v_Voice.get()),
+                      int(self.v_Setting.get()), int(self.v_Plot.get()),
+                      int(self.v_Character.get())]
+        total_point = 0
+        recommend_point = 0
+        for i, point in enumerate(point_list):
+            total_point += point * weight_total[i]
+            recommend_point += point * weight_recommend[i]
+        total_point = round(total_point, 2)
+        recommend_point = round(recommend_point, 2)
+        return total_point, recommend_point
 
 
 def not_number(s):
