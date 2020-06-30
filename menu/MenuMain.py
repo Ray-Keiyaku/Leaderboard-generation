@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import END, DISABLED
 from Leaderboard.read import get_table_content
+from menu.MenuChange import MenuChange
+from menu.MenuDelete import MenuDelete
 from menu.MenuInsert import MenuInsert
 
 
@@ -134,10 +136,14 @@ class MenuMain(tk.Toplevel):
         self.update_data()
 
     def change(self):
-        self.destroy()
+        insertDialog = MenuChange(self.table_now)
+        self.wait_window(insertDialog)
+        self.update_data()
 
     def delete(self):
-        self.destroy()
+        insertDialog = MenuDelete(self.table_now)
+        self.wait_window(insertDialog)
+        self.update_data()
 
     def back(self):
         self.destroy()  # 销毁窗口

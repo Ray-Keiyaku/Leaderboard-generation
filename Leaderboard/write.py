@@ -30,7 +30,8 @@ def init_database():
                                 Recommend   REAL     NOT NULL);'''.format(tab))
 
 
-def insert_to_table(table_now, v_NAME, v_PicStyle, v_PicQuality, v_Music, v_Voice, v_Setting, v_Plot, v_Character, total_point, recommend_point):
+def insert_to_table(table_now, v_NAME, v_PicStyle, v_PicQuality, v_Music, v_Voice, v_Setting, v_Plot, v_Character,
+                    total_point, recommend_point):
     conn = sqlite3.connect(data.DATA_PATH)
     cur = conn.cursor()  # 创建游标cur来执行SQL语句
     cur.execute("INSERT INTO {tab} \
@@ -38,4 +39,24 @@ def insert_to_table(table_now, v_NAME, v_PicStyle, v_PicQuality, v_Music, v_Voic
                 .format(tab=table_now, vn=v_NAME, vps=v_PicStyle, vpq=v_PicQuality,
                         vm=v_Music, vv=v_Voice, vs=v_Setting, vp=v_Plot, vc=v_Character,
                         vt=total_point, vr=recommend_point))
+    conn.commit()
+
+
+def change_to_table(table_now, v_NAME, v_PicStyle, v_PicQuality, v_Music, v_Voice, v_Setting, v_Plot, v_Character,
+                    total_point, recommend_point):
+    conn = sqlite3.connect(data.DATA_PATH)
+    cur = conn.cursor()  # 创建游标cur来执行SQL语句
+    cur.execute("UPDATE {tab} \
+        SET PicStyle={vps},PicQuality={vpq},Music={vm},Voice={vv},Setting={vs},\
+        Plot={vp},Character={vc},TotalPoint={vt},Recommend={vr} \
+        WHERE NAME ='{vn}'".format(tab=table_now, vps=v_PicStyle, vpq=v_PicQuality,
+                                   vm=v_Music, vv=v_Voice, vs=v_Setting, vp=v_Plot, vc=v_Character,
+                                   vt=total_point, vr=recommend_point, vn=v_NAME))
+    conn.commit()
+
+
+def delete_to_table(table_now, v_NAME):
+    conn = sqlite3.connect(data.DATA_PATH)
+    cur = conn.cursor()  # 创建游标cur来执行SQL语句
+    cur.execute("DELETE FROM {tab} WHERE NAME ='{vn}'".format(tab=table_now, vn=v_NAME))
     conn.commit()
