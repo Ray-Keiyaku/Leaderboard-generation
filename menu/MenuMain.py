@@ -4,6 +4,7 @@ from Leaderboard.read import get_table_content
 from menu.MenuChange import MenuChange
 from menu.MenuDelete import MenuDelete
 from menu.MenuInsert import MenuInsert
+from menu.MenuPrint import MenuPrint
 
 
 class MenuMain(tk.Toplevel):
@@ -128,7 +129,9 @@ class MenuMain(tk.Toplevel):
         frame_button.grid(row=1, column=0, columnspan=11, sticky=tk.W)
 
     def print(self):
-        self.destroy()
+        insertDialog = MenuPrint(self.table_now)
+        self.wait_window(insertDialog)
+        self.update_data()
 
     def insert(self):
         insertDialog = MenuInsert(self.table_now)
