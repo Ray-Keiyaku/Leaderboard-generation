@@ -1,9 +1,13 @@
+import os
 import sqlite3
 
 from globalData import data
 
 
 def init_database():
+    folder = os.path.exists(data.TOP_PATH)
+    if not folder:  # 判断是否存在文件夹如果不存在则创建为文件夹
+        os.makedirs(data.TOP_PATH)
     conn = sqlite3.connect(data.DATA_PATH)
     cur = conn.cursor()  # 创建游标cur来执行SQL语句
     cur.execute("SELECT name FROM sqlite_master WHERE type='table'")

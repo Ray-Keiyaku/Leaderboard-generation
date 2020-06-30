@@ -1,7 +1,9 @@
+import os
+
 SOFT_INFO = "author: ray\nversion: v0.0.1"
 
-TOP_PATH = "C:/Users/zrztt/Desktop/test"
-DATA_PATH = TOP_PATH + "/testinit.db"
+TOP_PATH = os.path.expanduser('~') + "/.LeaderboardGenerator"
+DATA_PATH = TOP_PATH + "/database.db"
 TEMPLATE_PATH = TOP_PATH + "/template.jpg"
 PICTURE_PATH = TOP_PATH + "/temp.png"
 

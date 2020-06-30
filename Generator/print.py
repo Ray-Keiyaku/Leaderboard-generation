@@ -1,11 +1,12 @@
+import os
 import time
 from PIL import Image, ImageDraw, ImageFont
 
-from Leaderboard.read import get_table_content
 from globalData import data
 
 
 def print_table(table_now, table_content):
+
     table_content.remove(table_content[0])
 
     image = Image.open(data.TEMPLATE_PATH)  # 图片模板
