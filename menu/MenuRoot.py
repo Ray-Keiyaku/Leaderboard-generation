@@ -16,13 +16,13 @@ class MenuRoot(tk.Tk):
         self.setupUI()
 
     def setupUI(self):
-        lab_message = tk.Label(self, text=data.SOFT_INFO, font=('Arial', 15))
+        lab_message = tk.Label(self, text=data.SOFT_INFO, font=(data.DISPLAY_FONT, 15))
         # 说明： bg为背景，font为字体，width为长，height为高，这里的长和高是字符的长和高，比如height=2,就是标签有2个字符这么高
         lab_message.grid(row=0, column=0, sticky=tk.W)  # Label内容content区域放置位置，自动调节尺寸
 
-        button_entry = tk.Button(self, text='选择排行榜', font=('Arial', 15), width=15, height=1, command=self.set_Table)
+        button_entry = tk.Button(self, text='选择排行榜', font=(data.DISPLAY_FONT, 15), width=15, height=1, command=self.set_Table)
         button_entry.grid(row=1, column=2, sticky=tk.W, padx=30, pady=50)
-        button_exit = tk.Button(self, text='退出', font=('Arial', 15), width=15, height=1, command=self.exit_window)
+        button_exit = tk.Button(self, text='退出', font=(data.DISPLAY_FONT, 15), width=15, height=1, command=self.exit_window)
         button_exit.grid(row=3, column=2, sticky=tk.W, padx=30, pady=50)
 
     def set_Table(self):

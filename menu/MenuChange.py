@@ -10,11 +10,11 @@ class MenuChange(tk.Toplevel):
     def __init__(self, table_now):
         super().__init__()
         self.title('修改数据：')
-        self.geometry('420x570')
+        # self.geometry('420x570')
 
         # 数据
         self.table_now = table_now
-        self.listbox = tk.Listbox(self, width=25, font=('Arial', 12))
+        self.listbox = tk.Listbox(self, width=25, font=(data.DISPLAY_FONT, 12))
         self.data = get_table_content(table_now)
         self.v_PicStyle = tk.StringVar()
         self.v_PicQuality = tk.StringVar()
@@ -29,11 +29,11 @@ class MenuChange(tk.Toplevel):
         self.grab_set()
 
     def setup_UI(self):
-        lab_message = tk.Label(self, text='修改{}中数据：(评分：0-100分)'.format(self.table_now), font=('Arial', 15))
+        lab_message = tk.Label(self, text='修改{}中数据：(评分：0-100分)'.format(self.table_now), font=(data.DISPLAY_FONT, 15))
         lab_message.grid(row=0, column=0, columnspan=2, sticky=tk.W)
 
         # 选择名称
-        lab_hint = tk.Label(self, text='选择要修改的项：', font=('Arial', 13))
+        lab_hint = tk.Label(self, text='选择要修改的项：', font=(data.DISPLAY_FONT, 13))
         self.data.remove(self.data[0])
         for item in self.data:
             self.listbox.insert(END, item[0])
@@ -42,45 +42,45 @@ class MenuChange(tk.Toplevel):
 
         # 输入提示
         frame_lab = tk.Frame(self)
-        lab_PicStyle = tk.Label(frame_lab, text='画风：', font=('Arial', 12))
+        lab_PicStyle = tk.Label(frame_lab, text='画风：', font=(data.DISPLAY_FONT, 12))
         lab_PicStyle.grid(row=0, column=0, sticky=tk.W, pady=5)
-        lab_PicQuality = tk.Label(frame_lab, text='画质：', font=('Arial', 12))
+        lab_PicQuality = tk.Label(frame_lab, text='画质：', font=(data.DISPLAY_FONT, 12))
         lab_PicQuality.grid(row=1, column=0, sticky=tk.W, pady=5)
-        lab_Music = tk.Label(frame_lab, text='音乐：', font=('Arial', 12))
+        lab_Music = tk.Label(frame_lab, text='音乐：', font=(data.DISPLAY_FONT, 12))
         lab_Music.grid(row=2, column=0, sticky=tk.W, pady=5)
-        lab_Voice = tk.Label(frame_lab, text='语音：', font=('Arial', 12))
+        lab_Voice = tk.Label(frame_lab, text='语音：', font=(data.DISPLAY_FONT, 12))
         lab_Voice.grid(row=3, column=0, sticky=tk.W, pady=5)
-        lab_Setting = tk.Label(frame_lab, text='设定：', font=('Arial', 12))
+        lab_Setting = tk.Label(frame_lab, text='设定：', font=(data.DISPLAY_FONT, 12))
         lab_Setting.grid(row=4, column=0, sticky=tk.W, pady=5)
-        lab_Plot = tk.Label(frame_lab, text='剧情：', font=('Arial', 12))
+        lab_Plot = tk.Label(frame_lab, text='剧情：', font=(data.DISPLAY_FONT, 12))
         lab_Plot.grid(row=5, column=0, sticky=tk.W, pady=5)
-        lab_Character = tk.Label(frame_lab, text='角色：', font=('Arial', 12))
+        lab_Character = tk.Label(frame_lab, text='角色：', font=(data.DISPLAY_FONT, 12))
         lab_Character.grid(row=6, column=0, sticky=tk.W, pady=5)
         frame_lab.grid(row=3, column=0, rowspan=8, sticky=tk.E)
 
         # 输入框
         frame_entry = tk.Frame(self)
-        entry_PicStyle = tk.Entry(frame_entry, font=('Arial', 12), textvariable=self.v_PicStyle)
+        entry_PicStyle = tk.Entry(frame_entry, font=(data.DISPLAY_FONT, 12), textvariable=self.v_PicStyle)
         entry_PicStyle.grid(row=0, column=0, sticky=tk.W, pady=5)
-        entry_PicQuality = tk.Entry(frame_entry, font=('Arial', 12), textvariable=self.v_PicQuality)
+        entry_PicQuality = tk.Entry(frame_entry, font=(data.DISPLAY_FONT, 12), textvariable=self.v_PicQuality)
         entry_PicQuality.grid(row=1, column=0, sticky=tk.W, pady=5)
-        entry_Music = tk.Entry(frame_entry, font=('Arial', 12), textvariable=self.v_Music)
+        entry_Music = tk.Entry(frame_entry, font=(data.DISPLAY_FONT, 12), textvariable=self.v_Music)
         entry_Music.grid(row=2, column=0, sticky=tk.W, pady=5)
-        entry_Voice = tk.Entry(frame_entry, font=('Arial', 12), textvariable=self.v_Voice)
+        entry_Voice = tk.Entry(frame_entry, font=(data.DISPLAY_FONT, 12), textvariable=self.v_Voice)
         entry_Voice.grid(row=3, column=0, sticky=tk.W, pady=5)
-        entry_Setting = tk.Entry(frame_entry, font=('Arial', 12), textvariable=self.v_Setting)
+        entry_Setting = tk.Entry(frame_entry, font=(data.DISPLAY_FONT, 12), textvariable=self.v_Setting)
         entry_Setting.grid(row=4, column=0, sticky=tk.W, pady=5)
-        entry_Plot = tk.Entry(frame_entry, font=('Arial', 12), textvariable=self.v_Plot)
+        entry_Plot = tk.Entry(frame_entry, font=(data.DISPLAY_FONT, 12), textvariable=self.v_Plot)
         entry_Plot.grid(row=5, column=0, sticky=tk.W, pady=5)
-        entry_Character = tk.Entry(frame_entry, font=('Arial', 12), textvariable=self.v_Character)
+        entry_Character = tk.Entry(frame_entry, font=(data.DISPLAY_FONT, 12), textvariable=self.v_Character)
         entry_Character.grid(row=6, column=0, sticky=tk.W, pady=5)
         frame_entry.grid(row=3, column=1, rowspan=8, sticky=tk.W)
 
         # 按钮
         frame_button = tk.Frame(self)
-        button_yes = tk.Button(frame_button, text='确定', font=('Arial', 15), width=10, height=1, command=self.confirm)
+        button_yes = tk.Button(frame_button, text='确定', font=(data.DISPLAY_FONT, 15), width=10, height=1, command=self.confirm)
         button_yes.grid(row=0, column=0, sticky=tk.E, padx=15, pady=10)
-        button_no = tk.Button(frame_button, text='取消', font=('Arial', 15), width=10, height=1, command=self.cancel)
+        button_no = tk.Button(frame_button, text='取消', font=(data.DISPLAY_FONT, 15), width=10, height=1, command=self.cancel)
         button_no.grid(row=0, column=1, sticky=tk.E, padx=15, pady=10)
         frame_button.grid(row=11, column=0, columnspan=2, sticky=tk.E)
 

@@ -12,7 +12,7 @@ class MenuPrint(tk.Toplevel):
     def __init__(self, table_now):
         super().__init__()
         self.title('排行打印中心')
-        self.geometry('350x600')
+        # self.geometry('350x600')
 
         # 数据
         self.data = get_table_content(table_now)
@@ -32,9 +32,9 @@ class MenuPrint(tk.Toplevel):
         # button
         frame_button = tk.Frame(self)
 
-        button_print = tk.Button(frame_button, text='打印排行', font=('Arial', 15), width=12, height=1, command=self.print)
+        button_print = tk.Button(frame_button, text='打印排行', font=(data.DISPLAY_FONT, 15), width=12, height=1, command=self.print)
         button_print.grid(row=0, column=0, sticky=tk.W, padx=15, pady=10)
-        button_back = tk.Button(frame_button, text='返回', font=('Arial', 15), width=12, height=1, command=self.back)
+        button_back = tk.Button(frame_button, text='返回', font=(data.DISPLAY_FONT, 15), width=12, height=1, command=self.back)
         button_back.grid(row=0, column=1, sticky=tk.W, padx=15, pady=10)
 
         frame_button.grid(row=1, column=0)

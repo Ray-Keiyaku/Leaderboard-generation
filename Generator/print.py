@@ -13,11 +13,11 @@ def print_table(table_now, table_content):
     image = image.resize((700, 1000), Image.ANTIALIAS)
     draw = ImageDraw.Draw(image)
     # width, height = image.size
-    font = ImageFont.truetype(data.PRINT_FONT, data.FONT_SIZE)
-    color = data.FONT_COLOR
+    font = ImageFont.truetype(data.PRINT_FONT, data.PRINT_FONT_SIZE)
+    color = data.PRINT_FONT_COLOR
     start_x = 50
     start_y = 300
-    line_spacing = data.LINE_SPACING
+    line_spacing = data.PRINT_LINE_SPACING
 
     # 标题
     cur_time = time.strftime("%Y.%m.%d", time.localtime())
