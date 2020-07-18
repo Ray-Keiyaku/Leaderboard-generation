@@ -7,6 +7,7 @@ TOP_PATH = os.path.expanduser('~') + "/.LeaderboardGenerator"
 DATA_PATH = TOP_PATH + "/database.db"
 TEMPLATE_PATH = TOP_PATH + "/template.jpg"
 PICTURE_PATH = TOP_PATH + "/temp.png"
+BACKUP_PATH = TOP_PATH + "/database.bak"
 
 # Weight
 INIT_LIST = ["动漫", "电影", "电视剧"]
