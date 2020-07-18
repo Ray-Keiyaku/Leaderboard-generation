@@ -11,7 +11,7 @@ class MenuRoot(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('可视化排行榜生成器')
-        self.geometry('500x600')
+        # self.geometry('500x600')
         # 程序界面
         self.setupUI()
 
@@ -21,9 +21,9 @@ class MenuRoot(tk.Tk):
         lab_message.grid(row=0, column=0, sticky=tk.W)  # Label内容content区域放置位置，自动调节尺寸
 
         button_entry = tk.Button(self, text='选择排行榜', font=(data.DISPLAY_FONT, 15), width=15, height=1, command=self.set_Table)
-        button_entry.grid(row=1, column=2, sticky=tk.W, padx=30, pady=50)
+        button_entry.grid(row=1, column=0, sticky=tk.W, padx=30, pady=50)
         button_exit = tk.Button(self, text='退出', font=(data.DISPLAY_FONT, 15), width=15, height=1, command=self.exit_window)
-        button_exit.grid(row=3, column=2, sticky=tk.W, padx=30, pady=50)
+        button_exit.grid(row=2, column=0, sticky=tk.W, padx=30, pady=50)
 
     def set_Table(self):
         # 接收弹窗的数据
