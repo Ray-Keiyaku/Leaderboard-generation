@@ -6,9 +6,6 @@ from globalData import data
 
 
 def print_table(table_now, table_content):
-
-    table_content.remove(table_content[0])
-
     image = Image.open(data.TEMPLATE_PATH)  # 图片模板
     image = image.resize((700, 1000), Image.ANTIALIAS)
     draw = ImageDraw.Draw(image)
