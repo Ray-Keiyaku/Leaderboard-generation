@@ -1,5 +1,9 @@
+import time
 import tkinter as tk
 from tkinter import END, DISABLED
+from tkinter.filedialog import asksaveasfilename
+
+from Leaderboard.importAndexport import table_export
 from Leaderboard.read import get_table_content
 from globalData import data
 from menu.MenuChange import MenuChange
@@ -29,16 +33,28 @@ class MenuMain(tk.Toplevel):
 
         # button
         frame_button = tk.Frame(self)
-        button_print = tk.Button(frame_button, text='打印排行', font=(data.DISPLAY_FONT, 15), width=12, height=1, command=self.print)
-        button_print.grid(row=0, column=0, sticky=tk.W, padx=15, pady=10)
-        button_insert = tk.Button(frame_button, text='插入新项目', font=(data.DISPLAY_FONT, 15), width=12, height=1, command=self.insert)
-        button_insert.grid(row=0, column=1, sticky=tk.W, padx=15, pady=10)
-        button_insert = tk.Button(frame_button, text='修改项目', font=(data.DISPLAY_FONT, 15), width=12, height=1, command=self.change)
-        button_insert.grid(row=0, column=2, sticky=tk.W, padx=15, pady=10)
-        button_insert = tk.Button(frame_button, text='删除项目', font=(data.DISPLAY_FONT, 15), width=12, height=1, command=self.delete)
-        button_insert.grid(row=0, column=3, sticky=tk.W, padx=15, pady=10)
-        button_back = tk.Button(frame_button, text='返回', font=(data.DISPLAY_FONT, 15), width=12, height=1, command=self.back)
-        button_back.grid(row=0, column=4, sticky=tk.W, padx=15, pady=10)
+        button_insert = tk.Button(frame_button, text='插入新项目', font=(data.DISPLAY_FONT, 15), width=12, height=1,
+                                  command=self.insert)
+        button_insert.grid(row=0, column=0, sticky=tk.W, padx=15, pady=10)
+        button_change = tk.Button(frame_button, text='修改项目', font=(data.DISPLAY_FONT, 15), width=12, height=1,
+                                  command=self.change)
+        button_change.grid(row=0, column=1, sticky=tk.W, padx=15, pady=10)
+        button_delete = tk.Button(frame_button, text='删除项目', font=(data.DISPLAY_FONT, 15), width=12, height=1,
+                                  command=self.delete)
+        button_delete.grid(row=0, column=2, sticky=tk.W, padx=15, pady=10)
+        button_back = tk.Button(frame_button, text='返回', font=(data.DISPLAY_FONT, 15), width=12, height=1,
+                                command=self.back)
+        button_back.grid(row=0, column=3, sticky=tk.W, padx=15, pady=10)
+        button_print = tk.Button(frame_button, text='打印排行', font=(data.DISPLAY_FONT, 15), width=12, height=1,
+                                 command=self.print)
+        button_print.grid(row=1, column=0, sticky=tk.W, padx=15, pady=10)
+        button_importData = tk.Button(frame_button, text='导入数据', font=(data.DISPLAY_FONT, 15), width=12, height=1,
+                                      command=self.importData)
+        button_importData.grid(row=1, column=1, sticky=tk.W, padx=15, pady=10)
+        button_exportData = tk.Button(frame_button, text='导出数据', font=(data.DISPLAY_FONT, 15), width=12, height=1,
+                                      command=self.exportData)
+        button_exportData.grid(row=1, column=2, sticky=tk.W, padx=15, pady=10)
+
         frame_button.grid(row=2, column=0, columnspan=12, sticky=tk.W)
 
     def print(self):
@@ -60,6 +76,20 @@ class MenuMain(tk.Toplevel):
         insertDialog = MenuDelete(self.table_now)
         self.wait_window(insertDialog)
         self.update_data()
+
+    def importData(self):
+        pass
+
+    def exportData(self):
+        cur_time = time.strftime("%Y-%m-%d", time.localtime())
+        default_name = self.table_now + cur_time
+        input_path = asksaveasfilename(parent=self, defaultextension="xlsx",
+                                       filetypes=[('表格', '*.xlsx')], initialfile=default_name)
+        if input_path:
+            if not table_export(input_path, self.table_now, self.data):
+                tk.messagebox.showerror('错误', '路径非法或文件未关闭，请重试！')
+            else:
+                tk.messagebox.showinfo('成功', '数据导出成功！')
 
     def back(self):
         self.destroy()  # 销毁窗口
@@ -190,7 +220,7 @@ class ContentAll(tk.Frame):
         self.content_recommend.grid(row=1, column=10, sticky=tk.W)
 
         self.scrollbar = tk.Scrollbar(self)
-        self.scrollbar.grid(row=1, column=11, sticky=tk.E+tk.N+tk.S)
+        self.scrollbar.grid(row=1, column=11, sticky=tk.E + tk.N + tk.S)
 
         # Changing the settings to make the scrolling work
         self.scrollbar['command'] = self.on_scrollbar
