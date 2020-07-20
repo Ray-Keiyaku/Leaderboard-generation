@@ -144,7 +144,7 @@ class MenuInsert(tk.Toplevel):
 
 def not_number(s):
     try:
-        float(s)
+        int(s)
         return False
     except ValueError:
         return True
