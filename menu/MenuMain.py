@@ -8,6 +8,7 @@ from Leaderboard.read import get_table_content
 from globalData import data
 from menu.MenuChange import MenuChange
 from menu.MenuDelete import MenuDelete
+from menu.MenuImport import MenuImport
 from menu.MenuInsert import MenuInsert
 from menu.MenuPrint import MenuPrint
 
@@ -28,8 +29,8 @@ class MenuMain(tk.Toplevel):
 
     def setup_UI(self):
         # content
-        content = ContentAll(self, self.data)
-        content.grid(row=1, column=0, columnspan=12, sticky=tk.W)
+        content = ContentAll(self, self.data, 20)
+        content.grid(row=0, column=0, columnspan=12, sticky=tk.W)
 
         # button
         frame_button = tk.Frame(self)
@@ -55,7 +56,7 @@ class MenuMain(tk.Toplevel):
                                       command=self.exportData)
         button_exportData.grid(row=1, column=2, sticky=tk.W, padx=15, pady=10)
 
-        frame_button.grid(row=2, column=0, columnspan=12, sticky=tk.W)
+        frame_button.grid(row=1, column=0, columnspan=12, sticky=tk.W)
 
     def print(self):
         insertDialog = MenuPrint(self.table_now)
@@ -78,13 +79,15 @@ class MenuMain(tk.Toplevel):
         self.update_data()
 
     def importData(self):
-        pass
+        importDialog = MenuImport(self.table_now)
+        self.wait_window(importDialog)
+        self.update_data()
 
     def exportData(self):
         cur_time = time.strftime("%Y-%m-%d", time.localtime())
         default_name = self.table_now + cur_time
         input_path = asksaveasfilename(parent=self, defaultextension="xlsx",
-                                       filetypes=[('表格', '*.xlsx')], initialfile=default_name)
+                                       filetypes=[('Excel 表格', '*.xlsx')], initialfile=default_name)
         if input_path:
             if not table_export(input_path, self.table_now, self.data):
                 tk.messagebox.showerror('错误', '路径非法或文件未关闭，请重试！')
@@ -101,7 +104,7 @@ class MenuMain(tk.Toplevel):
 
 
 class ContentAll(tk.Frame):
-    def __init__(self, master, table_data):
+    def __init__(self, master, table_data, height):
         tk.Frame.__init__(self, master)
         self.data = table_data
 
@@ -130,7 +133,7 @@ class ContentAll(tk.Frame):
         lab_Recommend.grid(row=0, column=10, sticky=tk.W, pady=5)
 
         # RANK
-        self.content_rank = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=5)
+        self.content_rank = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=5)
         # self.content_rank.insert(END, 'RANK')
         if len(self.data) > 0:
             for i in range(1, len(self.data) + 1):
@@ -140,7 +143,7 @@ class ContentAll(tk.Frame):
         self.content_rank.grid(row=1, column=0, sticky=tk.W)
 
         # NAME
-        self.content_name = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=25, wrap=tk.NONE)
+        self.content_name = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=25, wrap=tk.NONE)
         for item in self.data:
             self.content_name.insert(END, item[0])
             self.content_name.insert(tk.INSERT, '\n')
@@ -148,7 +151,7 @@ class ContentAll(tk.Frame):
         self.content_name.grid(row=1, column=1, sticky=tk.W)
 
         # PicStyle
-        self.content_picStyle = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=8)
+        self.content_picStyle = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=8)
         for item in self.data:
             self.content_picStyle.insert(END, item[1])
             self.content_picStyle.insert(tk.INSERT, '\n')
@@ -156,7 +159,7 @@ class ContentAll(tk.Frame):
         self.content_picStyle.grid(row=1, column=2, sticky=tk.W)
 
         # PicQuality
-        self.content_picQuality = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=8)
+        self.content_picQuality = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=8)
         for item in self.data:
             self.content_picQuality.insert(END, item[2])
             self.content_picQuality.insert(tk.INSERT, '\n')
@@ -164,7 +167,7 @@ class ContentAll(tk.Frame):
         self.content_picQuality.grid(row=1, column=3, sticky=tk.W)
 
         # Music
-        self.content_music = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=8)
+        self.content_music = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=8)
         for item in self.data:
             self.content_music.insert(END, item[3])
             self.content_music.insert(tk.INSERT, '\n')
@@ -172,7 +175,7 @@ class ContentAll(tk.Frame):
         self.content_music.grid(row=1, column=4, sticky=tk.W)
 
         # Voice
-        self.content_voice = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=8)
+        self.content_voice = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=8)
         for item in self.data:
             self.content_voice.insert(END, item[4])
             self.content_voice.insert(tk.INSERT, '\n')
@@ -180,7 +183,7 @@ class ContentAll(tk.Frame):
         self.content_voice.grid(row=1, column=5, sticky=tk.W)
 
         # Setting
-        self.content_setting = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=8)
+        self.content_setting = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=8)
         for item in self.data:
             self.content_setting.insert(END, item[5])
             self.content_setting.insert(tk.INSERT, '\n')
@@ -188,7 +191,7 @@ class ContentAll(tk.Frame):
         self.content_setting.grid(row=1, column=6, sticky=tk.W)
 
         # Plot
-        self.content_plot = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=8)
+        self.content_plot = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=8)
         for item in self.data:
             self.content_plot.insert(END, item[6])
             self.content_plot.insert(tk.INSERT, '\n')
@@ -196,7 +199,7 @@ class ContentAll(tk.Frame):
         self.content_plot.grid(row=1, column=7, sticky=tk.W)
 
         # Character
-        self.content_character = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=8)
+        self.content_character = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=8)
         for item in self.data:
             self.content_character.insert(END, item[7])
             self.content_character.insert(tk.INSERT, '\n')
@@ -204,7 +207,7 @@ class ContentAll(tk.Frame):
         self.content_character.grid(row=1, column=8, sticky=tk.W)
 
         # TotalPoint
-        self.content_totalPoint = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=8)
+        self.content_totalPoint = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=8)
         for item in self.data:
             self.content_totalPoint.insert(END, item[8])
             self.content_totalPoint.insert(tk.INSERT, '\n')
@@ -212,7 +215,7 @@ class ContentAll(tk.Frame):
         self.content_totalPoint.grid(row=1, column=9, sticky=tk.W)
 
         # Recommend
-        self.content_recommend = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=20, width=10)
+        self.content_recommend = tk.Text(self, font=(data.DISPLAY_FONT, 12), height=height, width=10)
         for item in self.data:
             self.content_recommend.insert(END, item[9])
             self.content_recommend.insert(tk.INSERT, '\n')
