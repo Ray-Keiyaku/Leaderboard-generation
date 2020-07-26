@@ -55,14 +55,18 @@ class MenuRoot(tk.Tk):
     def data_backUp(self):
         a = tk.messagebox.askokcancel('警告:', '建立备份将覆盖原备份！\n确定要新建备份吗？')
         if a:
-            backUp()
-            tk.messagebox.showinfo('成功', '备份成功！')
+            if backUp():
+                tk.messagebox.showinfo('成功', '备份成功！')
+            else:
+                tk.messagebox.showerror('错误', '备份失败，请检查备份路径权限')
 
     def data_restore(self):
         a = tk.messagebox.askokcancel('警告:', '恢复数据将覆盖现有数据！\n确定要恢复数据吗？')
         if a:
-            restore()
-            tk.messagebox.showinfo('成功', '恢复成功！')
+            if restore():
+                tk.messagebox.showinfo('成功', '恢复成功！')
+            else:
+                tk.messagebox.showerror('错误', '备份文件不存在')
 
     def exit_window(self):
         self.destroy()
