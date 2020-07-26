@@ -1,6 +1,6 @@
-from Leaderboard.write import init_database
+from globalData.initial import init_all
 from menu.MenuRoot import MenuRoot
 
-init_database()
+init_all()
 app = MenuRoot()
 app.mainloop()
