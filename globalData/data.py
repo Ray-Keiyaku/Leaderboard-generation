@@ -1,6 +1,6 @@
 import os
 
-SOFT_INFO = "author: ray      \nversion: v0.0.1"
+SOFT_INFO = "author: ray      \nversion: v0.1.0"
 
 # Resource
 res = {"template": "template.jpg", "print_font": "SourceHanSans-Regular.ttc"}
