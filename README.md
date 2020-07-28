@@ -11,7 +11,7 @@
 
 ## 介绍
 
-**Lerator ** *(/lerator/)* ，取自 `Leaderboard generator` 中的 `Le` 与  `rator` 。
+**Lerator** *(/lerator/)* ，取自 `Leaderboard generator` 中的 `Le` 与  `rator` 。
 
 该项目主要用于维护排行榜信息，生成排行榜图片。
 
@@ -38,11 +38,11 @@
 
 ## 截图
 
-![界面1](https://i.loli.net/2020/07/29/TWfUSNIxhOPzuLy.png)
+<img src="https://i.loli.net/2020/07/29/TWfUSNIxhOPzuLy.png" alt="界面1" style="zoom:33%;" />
 
-![界面2](https://i.loli.net/2020/07/29/S61DGkmNUCbPAut.png)
+<img src="https://i.loli.net/2020/07/29/S61DGkmNUCbPAut.png" alt="界面2" style="zoom:50%;" />
 
-![界面3](https://i.loli.net/2020/07/29/6V28yQj5nomkGhB.png)
+<img src="https://i.loli.net/2020/07/29/6V28yQj5nomkGhB.png" alt="界面3" style="zoom:33%;" />
 
 ## 感谢
 
