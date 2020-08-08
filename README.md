@@ -1,11 +1,12 @@
 <p align="center">
-  <h1 align="center">Lerator</h3>
+  <h1 align="center">Lerator</h1>
   <p align="center">A simple leaderboard image generator.<p>
   <p align="center">
     <a href="https://blog.qiyuex.top/about/"><img src="https://img.shields.io/badge/MADE--BY-Ray-blue?style=flat-square" alt="QiYue's Blog"></a>
     <img src="https://img.shields.io/badge/VRESION-v0.1.0-critical?style=flat-square" alt="version v0.1.0">
   </p>
 </p>
+
 
 
 
@@ -34,7 +35,7 @@
 ## 使用
 
 1. 下载[release](https://github.com/Ray-Keiyaku/Lerator/releases)中二进制程序使用。
-2. 克隆仓库后手动编译使用。
+2. 克隆仓库后使用`python`解释运行。
 
 ## 截图
 
