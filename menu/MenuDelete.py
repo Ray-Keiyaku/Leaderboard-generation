@@ -27,7 +27,6 @@ class MenuDelete(tk.Toplevel):
 
         # 选择名称
         lab_hint = tk.Label(self, text='选择要删除的项：', font=(data.DISPLAY_FONT, 13))
-        self.data.remove(self.data[0])
         for item in self.data:
             self.listbox.insert(END, item[0])
         lab_hint.grid(row=1, column=0, columnspan=2, sticky=tk.W)
